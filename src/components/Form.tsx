@@ -2,17 +2,21 @@ import {
   ChangeEvent,
   Dispatch,
   FormEvent,
-  forwardRef,
   SetStateAction,
+  useRef,
   useState,
 } from "react";
-import { ITask } from "../App";
+import { ITask } from "../App2";
+import { useTaskContext } from "../context/TaskContext";
 
-const AddTaskForm = forwardRef<
-  HTMLInputElement,
-  { setTasks: Dispatch<SetStateAction<ITask[]>> }
->(({ setTasks }, ref) => {
+const AddTaskForm = ({
+  setTasks,
+}: {
+  setTasks: Dispatch<SetStateAction<ITask[]>>;
+}) => {
   const [newTaskName, setNewTaskName] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { addNewTask, tasks } = useTaskContext();
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setNewTaskName(e.target.value);
@@ -21,13 +25,18 @@ const AddTaskForm = forwardRef<
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (newTaskName) {
-      setTasks((prev) => [
-        ...prev,
-        { name: newTaskName, status: "incomplete" },
-      ]);
+      addNewTask({
+        name: newTaskName,
+        status: "incomplete",
+        taskID: tasks.length + 1,
+      });
+      // setTasks((prev) => [
+      //   ...prev,
+      //   { name: newTaskName, status: "incomplete", taskID: prev.length + 1 },
+      // ]);
       setNewTaskName("");
-    } else if (ref && typeof ref !== "function" && ref.current) {
-      ref.current.focus();
+    } else if (inputRef.current) {
+      inputRef.current.focus();
     }
   };
 
@@ -41,12 +50,12 @@ const AddTaskForm = forwardRef<
           type="text"
           onChange={changeHandler}
           value={newTaskName}
-          ref={ref}
+          ref={inputRef}
         />
         <button type="submit">Add task</button>
       </form>
     </>
   );
-});
+};
 
 export default AddTaskForm;
