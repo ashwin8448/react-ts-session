@@ -1,13 +1,13 @@
 import {
   ChangeEvent,
   Dispatch,
-  FormEvent,
+  FormEventHandler,
   SetStateAction,
   useRef,
   useState,
 } from "react";
 import { ITask } from "../App2";
-import { useTaskContext } from "../context/TaskContext";
+import Button from "./Button";
 
 const AddTaskForm = ({
   setTasks,
@@ -16,24 +16,18 @@ const AddTaskForm = ({
 }) => {
   const [newTaskName, setNewTaskName] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
-  const { addNewTask, tasks } = useTaskContext();
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setNewTaskName(e.target.value);
   };
 
-  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+  const submitHandler: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     if (newTaskName) {
-      addNewTask({
-        name: newTaskName,
-        status: "incomplete",
-        taskID: tasks.length + 1,
-      });
-      // setTasks((prev) => [
-      //   ...prev,
-      //   { name: newTaskName, status: "incomplete", taskID: prev.length + 1 },
-      // ]);
+      setTasks((prev) => [
+        ...prev,
+        { name: newTaskName, status: "incomplete", taskID: prev.length + 1 },
+      ]);
       setNewTaskName("");
     } else if (inputRef.current) {
       inputRef.current.focus();
@@ -52,10 +46,27 @@ const AddTaskForm = ({
           value={newTaskName}
           ref={inputRef}
         />
-        <button type="submit">Add task</button>
+        <Button type="submit" text="Add task" />
       </form>
     </>
   );
 };
 
 export default AddTaskForm;
+
+// ========================================================================
+// addNewTask({
+//   name: newTaskName,
+//   status: "incomplete",
+//   taskID: tasks.length + 1,
+// });
+// ========================================================================
+// dispatch({
+//   type: "add new task",
+//   payload: {
+//     name: newTaskName,
+//     status: "incomplete",
+//     taskID: tasks.length + 1,
+//   },
+// });
+// ========================================================================

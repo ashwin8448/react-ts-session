@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "./App.css";
 import AddTaskForm from "./components/Form";
-import TaskCards from "./components/Cards";
-import { TaskContextProvider } from "./context/TaskContext";
+import TaskCards from "./components/SavedTasks";
+// import { TaskContextProvider } from "./TaskContext";
 
 export interface ITask {
   name: string;
@@ -15,10 +15,8 @@ function App() {
 
   return (
     <>
-      <TaskContextProvider>
-        <AddTaskForm setTasks={setTasks} />
-        <TaskCards tasks={tasks} setTasks={setTasks} />
-      </TaskContextProvider>
+      <AddTaskForm setTasks={setTasks} />
+      <TaskCards tasks={tasks} setTasks={setTasks} />
     </>
   );
 }

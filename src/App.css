@@ -21,7 +21,7 @@ form {
     height: 20px;
   }
 
-  button {
+  .custom-button {
     width: fit-content;
   }
 }
@@ -33,6 +33,7 @@ form {
 
   .card {
     width: 200px;
+    height: 120px;
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0px 0px 5px yellow;
