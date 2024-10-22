@@ -2,7 +2,6 @@ import { useState } from "react";
 import "./App.css";
 import AddTaskForm from "./components/Form";
 import TaskCards from "./components/SavedTasks";
-import { TaskContextProvider } from "./TaskContext";
 // import { TaskContextProvider } from "./TaskContext";
 
 export interface ITask {
@@ -15,10 +14,10 @@ function App() {
   const [tasks, setTasks] = useState<ITask[]>([]);
 
   return (
-    <TaskContextProvider>
+    <>
       <AddTaskForm setTasks={setTasks} />
       <TaskCards tasks={tasks} setTasks={setTasks} />
-    </TaskContextProvider>
+    </>
   );
 }
 

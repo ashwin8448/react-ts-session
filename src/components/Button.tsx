@@ -1,16 +1,15 @@
-import { ComponentPropsWithoutRef } from "react";
+// import { ComponentPropsWithoutRef } from "react";
 
-const Button = ({
-  text,
-  ...rest
-}: {
-  text: string;
-} & ComponentPropsWithoutRef<"button">) => {
-  return (
-    <button className="custom-button" {...rest}>
-      {text}
-    </button>
-  );
-};
+// type ButtonProps = {
+//   text: string;
+// } & ComponentPropsWithoutRef<"button">;
 
-export default Button;
+// const Button = ({ text, ...rest }: ButtonProps) => {
+//   return (
+//     <button className="custom-button" {...rest}>
+//       {text}
+//     </button>
+//   );
+// };
+
+// export default Button;

@@ -7,16 +7,7 @@ interface ITaskContext {
   updateTask: (taskID: ITask["taskID"]) => void;
 }
 
-export const useTaskContext = () => {
-  const contextValues = useContext(TaskContext);
-  if (contextValues) {
-    return contextValues;
-  } else {
-    throw new Error("Cannot use useThemeContext outside ThemeContext provider");
-  }
-};
-
-const TaskContext = createContext({} as ITaskContext);
+const TaskContext = createContext<ITaskContext | null>(null);
 
 export const TaskContextProvider = ({ children }: { children: ReactNode }) => {
   const [tasks, setTasks] = useState<ITask[]>([]);
@@ -34,4 +25,13 @@ export const TaskContextProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </TaskContext.Provider>
   );
+};
+
+export const useTaskContext = () => {
+  const contextValues = useContext(TaskContext);
+  if (contextValues) {
+    return contextValues;
+  } else {
+    throw new Error("Cannot use useThemeContext outside ThemeContext provider");
+  }
 };
