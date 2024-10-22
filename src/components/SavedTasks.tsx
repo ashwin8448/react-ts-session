@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { ITask } from "../App2";
+import { ITask } from "../App_TodoList";
 import CardsContainer from "./CardsContainer";
 import Card from "./Card";
 
@@ -19,7 +19,11 @@ const TaskCards = ({
       <h2>Saved Tasks</h2>
       <CardsContainer>
         {tasks.map((task) => (
-          <Card task={task} clickHandler={() => clickHandler(task)} />
+          <Card
+            key={task.taskID}
+            task={task}
+            clickHandler={() => clickHandler(task)}
+          />
         ))}
       </CardsContainer>
     </>

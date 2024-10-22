@@ -6,7 +6,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { ITask } from "../App2";
+import { ITask } from "../App_TodoList";
 import Button from "./Button";
 
 const AddTaskForm = ({

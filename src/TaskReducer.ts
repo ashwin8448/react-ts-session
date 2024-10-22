@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { ITask } from "./App2";
+import { ITask } from "./App_TodoList";
 
 export type ActionTypes =
   | {

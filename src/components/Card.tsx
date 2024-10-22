@@ -1,5 +1,5 @@
 import { MouseEventHandler } from "react";
-import { ITask } from "../App2";
+import { ITask } from "../App_TodoList";
 import Button from "./Button";
 
 const Card = ({
@@ -10,7 +10,7 @@ const Card = ({
   clickHandler: MouseEventHandler;
 }) => {
   return (
-    <div key={task.taskID} className={`card ${task.status}`}>
+    <div className={`card ${task.status}`}>
       <p>{task.name}</p>
       {task.status === "incomplete" && (
         <Button text="Mark as completed" onClick={clickHandler} />
